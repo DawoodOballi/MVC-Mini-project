@@ -12,7 +12,7 @@ namespace MvcOvertime.Models
         public int Id { get; set; }
 
 
-        public string Day => Date.Day.ToString();
+        public string Day => Date.DayOfWeek.ToString();
 
 
         public int NumberOfHours { get; set; }
