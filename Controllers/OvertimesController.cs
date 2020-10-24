@@ -22,7 +22,16 @@ namespace MvcOvertime.Controllers
         // GET: Overtimes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Overtime.ToListAsync());
+            var overtimes = from o in _context.Overtime
+                            join e in _context.Employee on o.EmployeeId equals e.Id 
+                            into empOvertime from eo in empOvertime.DefaultIfEmpty()
+                            select new ViewModel
+                            {
+                                Overtime = o,
+                                Employee = eo == null ? null : eo
+                            };
+
+            return View(await overtimes.ToListAsync());
         }
 
         // GET: Overtimes/Details/5
@@ -54,7 +63,7 @@ namespace MvcOvertime.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Day,NumberOfHours,StartTime,DtStartTime,Date")] Overtime overtime)
+        public async Task<IActionResult> Create([Bind("Id,Day,NumberOfHours,StartTime,DtStartTime,Date,EmployeeId")] Overtime overtime)
         {
             if (ModelState.IsValid)
             {
@@ -74,11 +83,12 @@ namespace MvcOvertime.Controllers
             }
 
             var overtime = await _context.Overtime.FindAsync(id);
+            var viewModel = new ViewModel() { Overtime = overtime };
             if (overtime == null)
             {
                 return NotFound();
             }
-            return View(overtime);
+            return View(viewModel);
         }
 
         // POST: Overtimes/Edit/5
@@ -86,12 +96,18 @@ namespace MvcOvertime.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Day,NumberOfHours,StartTime,DtStartTime,Date")] Overtime overtime)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Day,NumberOfHours,StartTime,DtStartTime,Date,EmployeeId,Employee.FullName")] Overtime overtime)
         {
             if (id != overtime.Id)
             {
                 return NotFound();
             }
+            //var employee = _context.Employee.Where(e => e.Id == overtime.EmployeeId).FirstOrDefault();
+            //var viewModel = new ViewModel()
+            //{
+            //    Overtime = overtime,
+            //    Employee = employee
+            //};
 
             if (ModelState.IsValid)
             {

@@ -17,7 +17,9 @@ namespace MvcOvertime.Models
         public string LastName { get; set; }
         public string FullName => $"{FirstName} {LastName}";
         public string Department { get; set; }
-        
+        public int? AdminId { get; set; }
+
+        public virtual Admin Admin { get; set; }
         public virtual ICollection<Overtime> Overtime { get; set; }
 
     }

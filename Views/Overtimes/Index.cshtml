@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MvcOvertime.Models.Overtime>
+﻿@using MvcOvertime.Models
+@model IEnumerable<MvcOvertime.Models.ViewModel>
 
 @{
     ViewData["Title"] = "Available Overtime";
@@ -13,19 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Day)
+                @Html.DisplayNameFor(model => model.Employee.FullName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayNameFor(model => model.Overtime.Day)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberOfHours)
+                @Html.DisplayNameFor(model => model.Overtime.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DtStartTime)
+                @Html.DisplayNameFor(model => model.Overtime.NumberOfHours)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndTime)
+                @Html.DisplayNameFor(model => model.Overtime.DtStartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Overtime.EndTime)
             </th>
             <th></th>
         </tr>
@@ -33,28 +37,41 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Overtime.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Overtime.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Overtime.NumberOfHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Overtime.DtStartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Overtime.EndTime)
+            </td>
+            @if (item.Overtime.EmployeeId == null)
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Day)
+                    <a asp-action="Edit" asp-route-id="@item.Overtime.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Overtime.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Overtime.Id">Delete</a>
                 </td>
+            }
+            else
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Date)
+                    <a asp-action="Details" asp-route-id="@item.Overtime.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Overtime.Id">Delete</a>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfHours)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DtStartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+            }
+        </tr>
         }
     </tbody>
 </table>

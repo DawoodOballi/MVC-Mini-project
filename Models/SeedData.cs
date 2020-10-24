@@ -21,30 +21,30 @@ namespace MvcOvertime.Models
                 context.Overtime.AddRange(
                     new Overtime
                     {
+                        EmployeeId = 3,
                         NumberOfHours = 4,
                         StartTime = DateTime.Parse("18:00"),
-                        EmployeeId = 5
                     },
 
                     new Overtime
                     {
+                        EmployeeId = 3,
                         NumberOfHours = 4,
                         StartTime = DateTime.Parse("1:00"),
-                        EmployeeId = 6
                     },
 
                     new Overtime
                     {
+                        EmployeeId = 3,
                         NumberOfHours = 4,
                         StartTime = DateTime.Parse("12:00"),
-                        EmployeeId = 4
                     },
 
                     new Overtime
                     {
+                        EmployeeId = 3,
                         NumberOfHours = 4,
-                        StartTime = DateTime.Parse("7:00"),
-                        EmployeeId = 3
+                        StartTime = DateTime.Parse("12:00"),
                     }
                 );
 
