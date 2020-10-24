@@ -14,5 +14,6 @@ namespace MvcOvertime.Data
         }
 
         public DbSet<Overtime> Overtime { get; set; }
+        public DbSet<Employee> Employee { get; set; }
     }
 }

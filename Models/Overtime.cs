@@ -32,5 +32,9 @@ namespace MvcOvertime.Models
 
         [Display(Name ="Start Time")]
         public string DtStartTime => StartTime.ToString("t", new CultureInfo("en-US")); 
+
+        public int? EmployeeId { get; set; }
+
+        public virtual Employee Employee { get; set; }
     }
 }
