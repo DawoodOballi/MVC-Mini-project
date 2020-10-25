@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcOvertime.Data;
 using MvcOvertime.Models;
+using MvcOvertime.ViewModels;
 
 namespace MvcOvertime.Controllers
 {

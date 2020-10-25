@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using MvcOvertime.Data;
+using Microsoft.AspNetCore.Identity;
+using MvcOvertime.Models;
 
 namespace MvcOvertime
 {
@@ -28,6 +30,8 @@ namespace MvcOvertime
             services.AddControllersWithViews();
             services.AddDbContext<OvertimeContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("OvertimeContext")));
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<OvertimeContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,13 +52,14 @@ namespace MvcOvertime
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Login}/{id?}");
             });
         }
     }
