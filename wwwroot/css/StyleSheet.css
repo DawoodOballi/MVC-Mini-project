@@ -1,0 +1,19 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+body{
+    background-color: red;
+    background-image:linear-gradient(orange, yellow);
+    color:white;
+    height:100vh;
+}
+
+header{
+    text-align:center;
+    width:auto;
+    padding:5px;
+}
+
+.btn-primary {
+    background-color:chocolate
+}

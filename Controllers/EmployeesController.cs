@@ -20,9 +20,15 @@ namespace MvcOvertime.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Employee.ToListAsync());
+            var employees = from e in _context.Employee
+                            select e;
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                employees = employees.Where(e => e.FirstName.Contains(searchString));
+            }
+            return View(await employees.ToListAsync());
         }
 
         // GET: Employees/Details/5
@@ -54,7 +60,7 @@ namespace MvcOvertime.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Department")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +92,7 @@ namespace MvcOvertime.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Department")] Employee employee)
         {
             if (id != employee.Id)
             {

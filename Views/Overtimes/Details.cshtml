@@ -1,4 +1,4 @@
-﻿@model MvcOvertime.Models.Overtime
+﻿@model MvcOvertime.ViewModels.ViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,38 +11,46 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Day)
+            @Html.DisplayNameFor(model => model.Overtime.Day)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Day)
+            @Html.DisplayFor(model => model.Overtime.Day)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfHours)
+            @Html.DisplayNameFor(model => model.Overtime.NumberOfHours)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfHours)
+            @Html.DisplayFor(model => model.Overtime.NumberOfHours)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.Overtime.Date)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Date)
+            @Html.DisplayFor(model => model.Overtime.Date)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DtStartTime)
+            @Html.DisplayNameFor(model => model.Overtime.DtStartTime)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DtStartTime)
+            @Html.DisplayFor(model => model.Overtime.DtStartTime)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EndTime)
+            @Html.DisplayNameFor(model => model.Overtime.EndTime)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EndTime)
+            @Html.DisplayFor(model => model.Overtime.EndTime)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.FullName) |
+            @Html.DisplayFor(model => model.Employee.Id)
+        </dd>
+
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Overtime.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

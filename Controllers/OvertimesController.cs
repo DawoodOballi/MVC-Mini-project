@@ -42,9 +42,17 @@ namespace MvcOvertime.Controllers
             {
                 return NotFound();
             }
+            var viewModel = from o in _context.Overtime
+                           join e in _context.Employee on o.EmployeeId equals e.Id
+                           into empOvertime
+                           from eo in empOvertime.DefaultIfEmpty()
+                           select new ViewModel
+                           {
+                               Overtime = o,
+                               Employee = eo == null ? null : eo
+                           };
+            var overtime = await viewModel.Where(o => o.Overtime.Id == id).FirstOrDefaultAsync();
 
-            var overtime = await _context.Overtime
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (overtime == null)
             {
                 return NotFound();

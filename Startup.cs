@@ -30,7 +30,7 @@ namespace MvcOvertime
             services.AddControllersWithViews();
             services.AddDbContext<OvertimeContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("OvertimeContext")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(/*options => options.SignIn.RequireConfirmedAccount = false*/)
                 .AddEntityFrameworkStores<OvertimeContext>();
         }
 

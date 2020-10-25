@@ -41,12 +41,12 @@ namespace MvcOvertime.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(admin.Name, string.Empty, false, false);
-                if(result.Succeeded)
+                var result = await _context.Admin.Where(a => a.Name == admin.Name).FirstOrDefaultAsync();
+                if(result != null)
                 {
-                    return RedirectToAction("index", "Home");
+                    ViewData["user"] = admin.Name;
+                   return RedirectToAction("index", "Home", result);
                 }
-
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
             }
             return View(admin);
